@@ -1,27 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  state = {
+    count: 0,
+  };
+
+  constructor() {
+    super();
+
+    this.clickUp = this.clickUp.bind(this);
+    this.clickDown = this.clickDown.bind(this);
+  }
+  
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <button onClick={this.clickUp}>&uarr;</button>
+
+          <h1>{ this.state.count }</h1>
+
+          <button onClick={this.clickDown}>&darr;</button>
         </header>
       </div>
     );
+  }
+
+  clickUp() {
+    this.setState({
+      count: this.state.count + 1,
+    });
+  }
+
+  clickDown() {
+    this.setState({
+      count: this.state.count - 1,
+    });
   }
 }
 
