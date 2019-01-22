@@ -46,3 +46,16 @@ button:focus {
   outline: none;
   box-shadow: 0 0 5px 2px #cc1e1e;
 }
+
+hr {
+  width: 300px;
+  margin-top: 45px;
+}
+
+h2 {
+  font-size: smaller;
+}
+
+pre {
+  text-align: left;
+}

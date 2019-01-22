@@ -22,6 +22,12 @@ class App extends Component {
           <h1>{ this.state.count }</h1>
 
           <button onClick={this.clickDown}>&darr;</button>
+
+          <hr />
+
+          <h2>Current State:</h2>
+
+          <pre>{JSON.stringify(this.state, null, 4)}</pre>
         </header>
       </div>
     );
