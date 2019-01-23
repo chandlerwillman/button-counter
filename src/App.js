@@ -3,46 +3,91 @@ import './App.css';
 
 class App extends Component {
   state = {
-    count: 0,
+    name: '',
+    image: '',
+    inventory: [],
   };
-
-  constructor() {
+  
+  constructor(){
     super();
 
-    this.clickUp = this.clickUp.bind(this);
-    this.clickDown = this.clickDown.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
-  
+
   render() {
+    const inventory = this.state.inventory
+      .map((meme, index) => {
+        <li key={index}>
+          <h2>{meme.name}</h2>
+          <img src={meme.image} alt={meme.name} />
+          Quantity: {meme.quantity}
+        </li>
+      })
+
     return (
       <div className="App">
-        <header className="App-header">
-          <button onClick={this.clickUp}>&uarr;</button>
+        <form onSubmit={(event) => this.handleSubmit(event)}>
+          <label>
+            Name: 
+            <input 
+              type="Text" 
+              value={this.state.name}
+              onChange={this.handleNameChange} />
+          </label>
+          <label>
+            Image: 
+            <input 
+              type="text"
+              value={this.state.image}
+              onChange={this.handleImageChange} />
+          </label>
+          <label>
+            Quantity: 
+            <input type="text"/>
+          </label>
+          <button type="submit">Add</button>
+        </form>
+        
+        <ul>
+          {inventory}
+        </ul>
 
-          <h1>{ this.state.count }</h1>
-
-          <button onClick={this.clickDown}>&darr;</button>
-
-          <hr />
-
-          <h2>Current State:</h2>
-
-          <pre>{JSON.stringify(this.state, null, 4)}</pre>
-        </header>
       </div>
     );
   }
 
-  clickUp() {
+  handleNameChange(event){
+    //console.log(event.target.value);
+    
     this.setState({
-      count: this.state.count + 1,
-    });
+      name: event.target.value,
+    })
   }
 
-  clickDown() {
+  handleImageChange(event){
     this.setState({
-      count: this.state.count - 1,
-    });
+      image: event.target.value,
+    })
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+
+    const { name, image, quantity } = this.state;
+
+    inventory.push({
+      name,
+      quantity,
+      image,
+    })
+
+    this.setState({
+      name: '',
+      image: '',
+      quantity: 0,
+      inventory,
+    })
   }
 }
 
